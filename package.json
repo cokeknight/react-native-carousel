@@ -1,29 +1,100 @@
 {
-  "name": "react-native-carousel",
-  "version": "0.10.0",
+  "_args": [
+    [
+      {
+        "raw": "react-native-carousel@^0.10.0",
+        "scope": null,
+        "escapedName": "react-native-carousel",
+        "name": "react-native-carousel",
+        "rawSpec": "^0.10.0",
+        "spec": ">=0.10.0 <0.11.0",
+        "type": "range"
+      },
+      "H:\\react-native-demo"
+    ]
+  ],
+  "_cnpm_publish_time": 1469557608502,
+  "_from": "react-native-carousel@^0.10.0",
+  "_hasShrinkwrap": false,
+  "_id": "react-native-carousel@0.10.0",
+  "_location": "/react-native-carousel",
+  "_nodeVersion": "6.2.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/react-native-carousel-0.10.0.tgz_1469557604880_0.479081992758438"
+  },
+  "_npmUser": {
+    "name": "nick_p",
+    "email": "nick@poulden.com"
+  },
+  "_npmVersion": "3.8.9",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-carousel@^0.10.0",
+    "scope": null,
+    "escapedName": "react-native-carousel",
+    "name": "react-native-carousel",
+    "rawSpec": "^0.10.0",
+    "spec": ">=0.10.0 <0.11.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "http://registry.npm.taobao.org/react-native-carousel/download/react-native-carousel-0.10.0.tgz",
+  "_shasum": "f4becc5ff46f66585d0ec9e42dce1efb1d7e571a",
+  "_shrinkwrap": null,
+  "_spec": "react-native-carousel@^0.10.0",
+  "_where": "H:\\react-native-demo",
+  "author": {
+    "name": "Nick Poulden",
+    "email": "nick@poulden.com",
+    "url": "https://github.com/nick"
+  },
+  "bugs": {
+    "url": "https://github.com/nick/react-native-carousel/issues"
+  },
+  "dependencies": {
+    "react-timer-mixin": "^0.13.3"
+  },
   "description": "Simple carousel component for react-native",
-  "main": "Carousel.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "f4becc5ff46f66585d0ec9e42dce1efb1d7e571a",
+    "size": 4337,
+    "noattachment": false,
+    "tarball": "http://registry.npm.taobao.org/react-native-carousel/download/react-native-carousel-0.10.0.tgz"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nick/react-native-carousel.git"
-  },
+  "gitHead": "cf8ca562178d72abbb5db5aa6984615222547f21",
+  "homepage": "https://github.com/nick/react-native-carousel",
   "keywords": [
     "react-native",
     "carousel"
   ],
-  "author": "Nick Poulden <nick@poulden.com> (https://github.com/nick)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nick/react-native-carousel/issues"
-  },
-  "homepage": "https://github.com/nick/react-native-carousel",
-  "dependencies": {
-    "react-timer-mixin": "^0.13.3"
-  },
+  "main": "Carousel.js",
+  "maintainers": [
+    {
+      "name": "nick_p",
+      "email": "nick@poulden.com"
+    }
+  ],
+  "name": "react-native-carousel",
+  "optionalDependencies": {},
   "peerDependencies": {
     "react-native": ">=0.28 <1.0"
-  }
+  },
+  "publish_time": 1469557608502,
+  "readme": "## Carousel component for react-native\n\n### Installation\n```bash\nnpm install react-native-carousel\n```\n\n###Properties\n\n```\nhideIndicators={false} // Set to true to hide the indicators\nindicatorColor=\"#FFFFFF\" // Active indicator color\nindicatorSize={20} // Indicator bullet size\nindicatorSpace={15} // space between each indicator\ninactiveIndicatorColor=\"#999999\" // Inactive indicator color\nindicatorAtBottom={true} // Set to false to show the indicators at the top\nindicatorOffset={250} // Indicator relative position from top or bottom\nonPageChange={callback} // Called when the active page changes\ninactiveIndicatorText= '•' // Inactive indicator content ( You can customize to use any Unicode character )\nindicatorText= '•' // Active indicator content ( You can customize to use any Unicode character )\n\nanimate={true} // Enable carousel autoplay\ndelay={1000} // Set Animation delay between slides\nloop={true} // Allow infinite looped animation. Depends on Prop {...animate} set to true.\n \n```\n\n### Usage example\n\nAssuming you have `npm install -g react-native-cli`, first generate an app:\n\n    react-native init RNCarousel\n    cd RNCarousel\n    npm install react-native-carousel --save\n\nThen paste the following into `RNCarousel/index.ios.js`:\n\n```javascript\n'use strict';\n\nvar React = require('react-native');\nvar {\n  AppRegistry,\n  StyleSheet,\n  Text,\n  View,\n} = React;\n\nvar Carousel = require('react-native-carousel');\n\nvar RNCarousel = React.createClass({\n  render: function() {\n    return (\n      <Carousel width={375}>\n        <View style={styles.container}>\n          <Text>Page 1</Text>\n        </View>\n        <View style={styles.container}>\n          <Text>Page 2</Text>\n        </View>\n        <View style={styles.container}>\n          <Text>Page 3</Text>\n        </View>\n      </Carousel>\n    );\n  }\n});\n\nvar styles = StyleSheet.create({\n  container: {\n    width: 375,\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n    backgroundColor: 'transparent',\n  },\n});\n\nAppRegistry.registerComponent('RNCarousel', () => RNCarousel);\n```\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nick/react-native-carousel.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.10.0"
 }

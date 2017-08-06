@@ -7,37 +7,19 @@ var {
   Text,
   View,
 } = require('react-native');
+// PropTypes is a separate package now:
+import PropTypes from 'prop-types';
 
-var TimerMixin = require('react-timer-mixin');
+import TimerMixin from 'react-timer-mixin';
 var CarouselPager = require('./CarouselPager');
 
-var Carousel = React.createClass({
-  mixins: [TimerMixin],
-
-  getDefaultProps() {
-    return {
-      hideIndicators: false,
-      indicatorColor: '#000000',
-      indicatorSize: 50,
-      inactiveIndicatorColor: '#999999',
-      indicatorAtBottom: true,
-      indicatorOffset: 250,
-      indicatorText: '•',
-      inactiveIndicatorText: '•',
-      width: null,
-      initialPage: 0,
-      indicatorSpace: 25,
-      animate: true,
-      delay: 1000,
-      loop: true,
-    };
-  },
-
-  getInitialState() {
-    return {
-      activePage: this.props.initialPage > 0 ? this.props.initialPage : 0,
-    };
-  },
+class Carousel extends React.Component {
+  constructor (props) {
+      //加载父类方法,不可省略
+    super(props)
+    this.state = { activePage: this.props.initialPage > 0 ? this.props.initialPage : 0 }
+  }
+  //mixins: [TimerMixin],
 
   getWidth() {
     if (this.props.width !== null) {
@@ -45,7 +27,7 @@ var Carousel = React.createClass({
     } else {
       return Dimensions.get('window').width;
     }
-  },
+  }
 
   componentDidMount() {
     if (this.props.initialPage > 0) {
@@ -55,12 +37,13 @@ var Carousel = React.createClass({
     if (this.props.animate && this.props.children){
         this._setUpTimer();
     }
-  },
+  }
+
 
   indicatorPressed(activePage) {
     this.setState({activePage});
     this.refs.pager.scrollToPage(activePage);
-  },
+  }
 
   renderPageIndicator() {
     if (this.props.hideIndicators === true) {
@@ -102,14 +85,14 @@ var Carousel = React.createClass({
         {indicators}
       </View>
     );
-  },
+  }
 
   _setUpTimer() {
      if (this.props.children.length > 1) {
-         this.clearTimeout(this.timer);
-         this.timer = this.setTimeout(this._animateNextPage, this.props.delay);
+         TimerMixin.clearTimeout(this.timer);
+         this.timer = TimerMixin.setTimeout(this._animateNextPage.bind(this), this.props.delay);
      }
-  },
+  }
 
   _animateNextPage() {
      var activePage = 0;
@@ -121,38 +104,56 @@ var Carousel = React.createClass({
 
      this.indicatorPressed(activePage);
      this._setUpTimer();
-  },
+  }
 
   _onAnimationBegin() {
-     this.clearTimeout(this.timer);
-  },
+     TimerMixin.clearTimeout(this.timer);
+  }
 
   _onAnimationEnd(activePage) {
     this.setState({activePage});
     if (this.props.onPageChange) {
       this.props.onPageChange(activePage);
     }
-  },
+  }
 
   render() {
+    if (this.props.animate && this.props.children && this.props.children.length){
+        this._setUpTimer();
+    }
     return (
       <View style={{ flex: 1 }}>
         <CarouselPager
           ref="pager"
           width={this.getWidth()}
           contentContainerStyle={styles.container}
-          onBegin={this._onAnimationBeginPage}
-          onEnd={this._onAnimationEnd}
+          onBegin={this._onAnimationBegin.bind(this)}
+          onEnd={this._onAnimationEnd.bind(this)}
         >
           {this.props.children}
         </CarouselPager>
         {this.renderPageIndicator()}
       </View>
     );
-  },
+  }
 
-});
-
+}
+Carousel.defaultProps = {
+  hideIndicators: false,
+  indicatorColor: '#000000',
+  indicatorSize: 50,
+  inactiveIndicatorColor: '#999999',
+  indicatorAtBottom: true,
+  indicatorOffset: 250,
+  indicatorText: '•',
+  inactiveIndicatorText: '•',
+  width: null,
+  initialPage: 0,
+  indicatorSpace: 25,
+  animate: true,
+  delay: 1000,
+  loop: true,
+}
 var styles = StyleSheet.create({
   pageIndicator: {
     position: 'absolute',
